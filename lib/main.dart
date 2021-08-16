@@ -42,11 +42,19 @@ class MyHomePage extends HookWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            Container(
+              width: 100,
+              height: 40,
+              padding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all()),
+              child: MaterialButton(
                 onPressed: () => play(),
-                child: Text(
-                  'Play',
-                )),
+                enableFeedback: false,
+                child: Icon(Icons.play_arrow),
+              ),
+            ),
           ],
         ),
       ),
