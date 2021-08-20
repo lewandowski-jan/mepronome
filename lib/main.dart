@@ -49,9 +49,9 @@ class MyHomePage extends HookWidget {
               Expanded(
                 flex: 1,
                 child: Container(
-                  color: Color(0xfff1f7ff),
+                  color: Color(0xFFF1F7FF),
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(0, 25, 0, 15),
+                    margin: const EdgeInsets.fromLTRB(0, 25, 0, 15),
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
@@ -68,13 +68,13 @@ class MyHomePage extends HookWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+                        padding: const EdgeInsets.only(top: 150),
                         child: Container(
                           child: Text(
                             'bpm',
                             style: TextStyle(
                               fontFamily: 'Metropolis',
-                              color: Color(0xff3292eb),
+                              color: Color(0xFF3292EB),
                               fontSize: 20,
                             ),
                             textAlign: TextAlign.center,
@@ -82,13 +82,13 @@ class MyHomePage extends HookWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        padding: const EdgeInsets.only(top: 10),
                         child: Container(
                           child: Text(
                             bpm.value.toInt().toString(),
                             style: TextStyle(
                               fontFamily: 'Metropolis',
-                              color: Color(0xfff1f7ff),
+                              color: Color(0xFFF1F7FF),
                               fontSize: 60,
                             ),
                             textAlign: TextAlign.center,
@@ -108,13 +108,13 @@ class MyHomePage extends HookWidget {
                           min: 50,
                           max: 200,
                           divisions: 150,
-                          activeColor: Color(0xfff1f7ff),
-                          inactiveColor: Color(0xfff1f7ff),
+                          activeColor: Color(0xFFF1F7FF),
+                          inactiveColor: Color(0xFFF1F7FF),
 
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0,230,0,0),
+                        padding: const EdgeInsets.only(top: 230),
                         child: Container(
                           child: Container(
                             width: 80,
@@ -129,8 +129,8 @@ class MyHomePage extends HookWidget {
                                     1,
                                   ],
                                   colors: [
-                                    Color(0xff3292eb),
-                                    Color(0xff2569a8)
+                                    Color(0xFF3292EB),
+                                    Color(0xFF2569A8)
                                   ]
                               ),
                               shape: BoxShape.circle,
@@ -145,7 +145,7 @@ class MyHomePage extends HookWidget {
                               child: Icon(
                                 isPlaying.value ? Icons.stop : Icons.play_arrow,
                                 size: 50,
-                                color: Color(0xfff1f7ff),
+                                color: Color(0xFFF1F7FF),
                             ),
                           ),
                         ),
@@ -165,8 +165,8 @@ class MyHomePage extends HookWidget {
                         1,
                       ],
                       colors: [
-                        Color(0xff0e2031),
-                        Color(0xff2569a8)
+                        Color(0xFF0E2031),
+                        Color(0xFF2569A8)
                       ]
                     ),
                   ),
