@@ -68,9 +68,10 @@ class MyHomePage extends HookWidget {
                 flex: 5,
                 child: Container(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 150),
+                        padding: const EdgeInsets.only(top: 30),
                         child: Container(
                           child: Text(
                             'bpm',
@@ -116,7 +117,7 @@ class MyHomePage extends HookWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 230),
+                        padding: const EdgeInsets.only(top: 150),
                         child: Container(
                           child: Container(
                             width: 80,
