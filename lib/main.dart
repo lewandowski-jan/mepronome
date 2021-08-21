@@ -133,7 +133,7 @@ class MyHomePage extends HookWidget {
                                   ],
                                   colors: [
                                     AppColors.PrimaryAccent,
-                                    Color(0xFF2569A8)
+                                    AppColors.GradientDark,
                                   ]
                               ),
                               shape: BoxShape.circle,
@@ -169,7 +169,7 @@ class MyHomePage extends HookWidget {
                       ],
                       colors: [
                         AppColors.PrimaryDark,
-                        Color(0xFF2569A8)
+                        AppColors.GradientDark,
                       ]
                     ),
                   ),
