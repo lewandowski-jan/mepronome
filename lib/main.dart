@@ -4,6 +4,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import 'package:metronome/common/app_colors.dart';
+
 void main() async {
   runApp(MyApp());
 }
@@ -49,7 +51,7 @@ class MyHomePage extends HookWidget {
               Expanded(
                 flex: 1,
                 child: Container(
-                  color: Color(0xFFF1F7FF),
+                  color: AppColors.PrimaryLight,
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(0, 25, 0, 15),
                     decoration: BoxDecoration(
@@ -74,7 +76,7 @@ class MyHomePage extends HookWidget {
                             'bpm',
                             style: TextStyle(
                               fontFamily: 'Metropolis',
-                              color: Color(0xFF3292EB),
+                              color: AppColors.PrimaryAccent,
                               fontSize: 20,
                             ),
                             textAlign: TextAlign.center,
@@ -88,7 +90,7 @@ class MyHomePage extends HookWidget {
                             bpm.value.toInt().toString(),
                             style: TextStyle(
                               fontFamily: 'Metropolis',
-                              color: Color(0xFFF1F7FF),
+                              color: AppColors.PrimaryLight,
                               fontSize: 60,
                             ),
                             textAlign: TextAlign.center,
@@ -108,8 +110,8 @@ class MyHomePage extends HookWidget {
                           min: 50,
                           max: 200,
                           divisions: 150,
-                          activeColor: Color(0xFFF1F7FF),
-                          inactiveColor: Color(0xFFF1F7FF),
+                          activeColor: AppColors.PrimaryLight,
+                          inactiveColor: AppColors.PrimaryLight,
 
                         ),
                       ),
@@ -129,7 +131,7 @@ class MyHomePage extends HookWidget {
                                     1,
                                   ],
                                   colors: [
-                                    Color(0xFF3292EB),
+                                    AppColors.PrimaryAccent,
                                     Color(0xFF2569A8)
                                   ]
                               ),
@@ -145,7 +147,7 @@ class MyHomePage extends HookWidget {
                               child: Icon(
                                 isPlaying.value ? Icons.stop : Icons.play_arrow,
                                 size: 50,
-                                color: Color(0xFFF1F7FF),
+                                color: AppColors.PrimaryLight,
                             ),
                           ),
                         ),
@@ -165,7 +167,7 @@ class MyHomePage extends HookWidget {
                         1,
                       ],
                       colors: [
-                        Color(0xFF0E2031),
+                        AppColors.PrimaryDark,
                         Color(0xFF2569A8)
                       ]
                     ),
