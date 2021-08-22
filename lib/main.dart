@@ -103,7 +103,7 @@ class MyHomePage extends HookWidget {
                         ),
                         child: Slider(
                             value: bpm.value,
-                            onChanged: (newBpm) {
+                            onChanged:isPlaying.value ? null:(newBpm) {
                               bpm.value = newBpm;
                             },
                           min: 50,
@@ -141,6 +141,7 @@ class MyHomePage extends HookWidget {
                                 isPlaying.value = !isPlaying.value;
                                 if(isPlaying.value) {
                                   _audio.play(bpm.value.toInt());
+
                                 } else {
                                   _audio.stop();
                                 }
