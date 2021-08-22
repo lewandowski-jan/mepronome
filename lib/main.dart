@@ -5,15 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:metronome/common/app_colors.dart';
+import 'package:metronome/utils/metro_audio.dart';
 
 void main() async {
   runApp(MyApp());
 }
 
-Future<AudioPlayer> play(int bpm) async {
-  AudioCache cache = new AudioCache();
-  return await cache.play("Metronome2.wav");
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -37,6 +34,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends HookWidget {
+  final _audio = MetroAudio();
   @override
   Widget build(BuildContext context) {
     final isPlaying = useState(false);
@@ -105,7 +103,7 @@ class MyHomePage extends HookWidget {
                         ),
                         child: Slider(
                             value: bpm.value,
-                            onChanged: (newBpm) {
+                            onChanged:isPlaying.value ? null:(newBpm) {
                               bpm.value = newBpm;
                             },
                           min: 50,
@@ -142,7 +140,10 @@ class MyHomePage extends HookWidget {
                               onTap: (){
                                 isPlaying.value = !isPlaying.value;
                                 if(isPlaying.value) {
-                                  play(bpm.value.toInt());
+                                  _audio.play(bpm.value.toInt());
+
+                                } else {
+                                  _audio.stop();
                                 }
                               },
                               child: Icon(
