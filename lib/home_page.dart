@@ -15,6 +15,7 @@ class HomePage extends HookWidget {
     return Scaffold(
       backgroundColor: AppColors.PrimaryLight,
       body: SafeArea(
+        bottom: false,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
