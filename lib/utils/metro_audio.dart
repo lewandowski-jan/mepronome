@@ -3,26 +3,25 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 
 class MetroAudio {
-  AudioPlayer _instance = new AudioPlayer();
-  AudioCache _cache = new AudioCache();
-  late Timer _tickTimer;
-  late int _tickIntervalBPS;
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  final AudioCache _audioCache = AudioCache();
+  late Timer _timer;
 
-
-  void play(int bpm) {
-    _tickIntervalBPS = (60 /bpm * 1000).toInt();
-    _tickTimer = new Timer.periodic(new Duration(milliseconds: _tickIntervalBPS), _onTick);
-
+  Future<void> _onTick(Timer t) async {
+    await _audioCache.play("Metronome2.wav");
   }
 
-  Future<AudioPlayer> _onTick(Timer t) async {
-    _instance = await _cache.play("Metronome2.wav");
-    return _instance;
-
+  void play(int bpm) {
+    final _tickIntervalBPS = (60 / bpm * 1000).toInt();
+    _timer = Timer.periodic(
+        Duration(
+          milliseconds: _tickIntervalBPS,
+        ),
+        _onTick);
   }
 
   void stop() async {
-    _tickTimer.cancel();
-    _instance.pause();
+    _timer.cancel();
+    _audioPlayer.pause();
   }
 }
