@@ -32,6 +32,7 @@ dependencies:
   audioplayers: ^0.19.1
   flutter_hooks: ^0.18.0
   provider: ^5.0.0
+  quiver: ^3.0.1
 
 dev_dependencies:
   flutter_test:

@@ -70,7 +70,7 @@ class HomePage extends HookWidget {
                                   bpm.value = newBpm;
                                 },
                           min: 50,
-                          max: 200,
+                          max: 400,
                           divisions: 150,
                           activeColor: AppColors.PrimaryLight,
                           inactiveColor: AppColors.PrimaryLight,
