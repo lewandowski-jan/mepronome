@@ -6,7 +6,11 @@ import 'common/app_colors.dart';
 import 'common/app_text_styles.dart';
 
 class HomePage extends HookWidget {
-  final _audio = MetroAudio();
+  HomePage({
+    required this.metroAudio,
+  });
+
+  final MetroAudio metroAudio;
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +73,9 @@ class HomePage extends HookWidget {
                               : (newBpm) {
                                   bpm.value = newBpm;
                                 },
-                          min: 50,
-                          max: 200,
-                          divisions: 150,
+                          min: 25,
+                          max: 400,
+                          divisions: 375,
                           activeColor: AppColors.PrimaryLight,
                           inactiveColor: AppColors.PrimaryLight,
                         ),
@@ -90,9 +94,9 @@ class HomePage extends HookWidget {
                             onTap: () {
                               isPlaying.value = !isPlaying.value;
                               if (isPlaying.value) {
-                                _audio.play(bpm.value.toInt());
+                                metroAudio.play(bpm.value.toInt());
                               } else {
-                                _audio.stop();
+                                metroAudio.stop();
                               }
                             },
                             child: Icon(

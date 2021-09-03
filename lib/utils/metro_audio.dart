@@ -1,27 +1,49 @@
 import 'dart:async';
+import 'dart:typed_data';
 
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
+import 'package:soundpool/soundpool.dart';
+import 'package:quiver/async.dart';
 
 class MetroAudio {
-  final AudioPlayer _audioPlayer = AudioPlayer();
-  final AudioCache _audioCache = AudioCache();
-  late Timer _timer;
+  MetroAudio() {
+    this.pool = Soundpool.fromOptions(
+      options: SoundpoolOptions(
+        streamType: StreamType.notification,
+        maxStreams: 12,
+      ),
+    );
+  }
+  
+  late Soundpool pool;
+  late int soundId;
+  final String filePath = 'assets/Metronome2.wav';
+  late StreamSubscription<DateTime> _timer;
 
-  Future<void> _onTick(Timer t) async {
-    await _audioCache.play("Metronome2.wav");
+  Future<void> prepare() async {
+    soundId = await rootBundle.load(filePath).then(
+          (ByteData soundData) => pool.load(soundData),
+        );
   }
 
-  void play(int bpm) {
-    final _tickIntervalBPS = (60 / bpm * 1000).toInt();
-    _timer = Timer.periodic(
-        Duration(
-          milliseconds: _tickIntervalBPS,
-        ),
-        _onTick);
+  Future<void> _onTick() async {
+    await pool.play(soundId);
+  }
+
+  void play(int bpm) async {
+    await prepare();
+    final _tickIntervalBPS = (60 / bpm * 1000 * 1000).toInt();
+    _timer = Metronome.periodic(new Duration(
+      microseconds: _tickIntervalBPS,
+    )).listen((_) => _onTick());
   }
 
   void stop() async {
     _timer.cancel();
-    _audioPlayer.pause();
+    pool.stop(soundId);
+  }
+
+  void dispose() {
+    pool.dispose();
   }
 }
