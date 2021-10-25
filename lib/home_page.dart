@@ -4,6 +4,7 @@ import 'package:metronome/utils/metro_audio.dart';
 
 import 'common/app_colors.dart';
 import 'common/app_text_styles.dart';
+import 'hamburger_menu.dart';
 
 
 class HomePage extends HookWidget {
@@ -19,78 +20,7 @@ class HomePage extends HookWidget {
     final isPlaying = useState(false);
     final bpm = useState(128.0);
     return Scaffold(
-      drawer: Drawer(
-        child: Container(
-          color: AppColors.PrimaryLight,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                child: Text(''),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/mepronome_logo.png',
-                    ),
-                  ),
-                ),
-              ),
-              ListTile(
-                leading:  Icon(Icons.arrow_forward_ios_rounded),
-                title: const Text('Metronom',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 21,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading:  Icon(Icons.arrow_forward_ios_rounded),
-                title: const Text('Stwórz sekwencję',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 21,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading:  Icon(Icons.arrow_forward_ios_rounded),
-                title: const Text('Wczytaj sekwencję',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 21,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading:  Icon(Icons.arrow_forward_ios_rounded),
-                title: const Text('Ustawienia',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 21,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                leading:  Icon(Icons.arrow_forward_ios_rounded),
-                title: const Text(
-                  'Twórcy',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 21,
-                  ),
-                ),
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: HamburgerMenu(),
       backgroundColor: AppColors.PrimaryLight,
       key: _scaffoldKey,
       body: Stack(
@@ -212,3 +142,5 @@ class HomePage extends HookWidget {
     );
   }
 }
+
+
