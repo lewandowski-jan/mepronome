@@ -71,6 +71,9 @@ flutter:
     - family: Metropolis
       fonts:
         - asset: assets/fonts/Metropolis-Bold.otf
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
 
   #
   # For details regarding fonts from package dependencies,
