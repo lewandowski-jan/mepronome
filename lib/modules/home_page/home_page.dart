@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:metronome/utils/metro_audio.dart';
+import 'package:metronome/router.dart';
 
-import 'common/app_colors.dart';
-import 'common/app_text_styles.dart';
+import '../../common/app_colors.dart';
+import '../../common/app_text_styles.dart';
 
 class HomePage extends HookWidget {
-  HomePage({
-    required this.metroAudio,
-  });
+  HomePage();
 
-  final MetroAudio metroAudio;
+  //final MetroAudio metroAudio;
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +92,12 @@ class HomePage extends HookWidget {
                             onTap: () {
                               isPlaying.value = !isPlaying.value;
                               if (isPlaying.value) {
-                                metroAudio.play(bpm.value.toInt());
+                                //metroAudio.play(bpm.value.toInt());
+                                Navigator.of(context).pushNamed(
+                                  AppRoutes.sequencer.route,
+                                ); //TODO: Move this action to menu
                               } else {
-                                metroAudio.stop();
+                                //metroAudio.stop();
                               }
                             },
                             child: Icon(

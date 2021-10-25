@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
@@ -14,7 +13,7 @@ class MetroAudio {
       ),
     );
   }
-  
+
   late Soundpool pool;
   late int soundId;
   final String filePath = 'assets/Metronome2.wav';

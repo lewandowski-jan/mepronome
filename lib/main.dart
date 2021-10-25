@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metronome/home_page.dart';
+import 'package:metronome/router.dart';
 import 'package:metronome/utils/metro_audio.dart';
 
 final metro = MetroAudio();
@@ -20,14 +20,16 @@ class MetronomeApp extends StatefulWidget {
 
 class _MetronomeAppState extends State<MetronomeApp> {
   final metroAudio = MetroAudio();
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'mepronome',
-      home: HomePage(
-        metroAudio: metroAudio,
-      ),
+      navigatorKey: navigatorKey,
+      onGenerateRoute: AppRouter.onGenerateRoute,
+      initialRoute: AppRoutes.homepage.route,
     );
   }
 
