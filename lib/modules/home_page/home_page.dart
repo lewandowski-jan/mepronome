@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:metronome/utils/metro_audio.dart';
-
-import 'common/app_colors.dart';
-import 'common/app_text_styles.dart';
-import 'hamburger_menu.dart';
-
+import 'package:metronome/common/app_colors.dart';
+import 'package:metronome/common/app_text_styles.dart';
+import 'package:metronome/hamburger_menu.dart';
 
 class HomePage extends HookWidget {
-  HomePage({
-    required this.metroAudio,
-  });
+  HomePage();
 
-  final MetroAudio metroAudio;
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -98,14 +92,7 @@ class HomePage extends HookWidget {
                               shape: BoxShape.circle,
                             ),
                             child: GestureDetector(
-                              onTap: () {
-                                isPlaying.value = !isPlaying.value;
-                                if (isPlaying.value) {
-                                  metroAudio.play(bpm.value.toInt());
-                                } else {
-                                  metroAudio.stop();
-                                }
-                              },
+                              onTap: () {},
                               child: Icon(
                                 isPlaying.value
                                     ? Icons.stop
