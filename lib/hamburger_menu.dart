@@ -34,7 +34,9 @@ class HamburgerMenu extends StatelessWidget {
                   fontSize: 21,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacementNamed(context, '/');
+              },
             ),
             ListTile(
               leading:  Icon(Icons.arrow_forward_ios_rounded),
@@ -44,7 +46,9 @@ class HamburgerMenu extends StatelessWidget {
                   fontSize: 21,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacementNamed(context, '/sequencer');
+              },
             ),
             ListTile(
               leading:  Icon(Icons.arrow_forward_ios_rounded),
