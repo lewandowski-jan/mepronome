@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:metronome/modules/sequencer/widgets/bottom_sheet_sequence_editor.dart';
+import 'package:metronome/common/app_colors.dart';
+import 'package:metronome/modules/sequencer/widgets/add_sequence.dart';
+import 'package:metronome/modules/sequencer/widgets/sequence.dart';
 
 class Sequencer extends StatelessWidget {
   const Sequencer({Key? key}) : super(key: key);
@@ -7,32 +9,51 @@ class Sequencer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          color: Colors.amber,
-          child: MaterialButton(
-            child: Text('klik'),
-            onPressed: () {
-              showModalBottomSheet<void>(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+      backgroundColor: AppColors.PrimaryLight,
+      body: SafeArea(
+        bottom: false,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                flex: 1,
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/mepronome_logo.png',
+                      ),
+                    ),
                   ),
                 ),
-                context: context,
-                builder: (_) => BottomSheetSequenceEditor(
-                  onDelete: () {
-                    print('delete'); //TODO: Delete the clicked sequence
-                  },
-                  onSave: (int bpm, int metro1, int metro2, int repeats) {
-                    print(
-                      '$bpm, $metro1, $metro2, $repeats',
-                    ); //TODO: Update data
-                  },
+              ),
+              Flexible(
+                flex: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(50),
+                    ),
+                    gradient: AppColors.gradientPrimaryDarkGradientDark,
+                  ),
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50, width: double.infinity),
+                    Wrap(
+                      alignment: WrapAlignment.start,
+                      children: [
+                        Sequence(),
+                        AddSequence(),
+                      ],
+                    ),
+                  ],
                 ),
-              );
-            },
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -15,7 +15,8 @@ class AppTextStyles {
   );
   static const p = TextStyle(
     fontFamily: 'Metropolis',
-    color: AppColors.PrimaryLight,
+    color: Colors.black,
+    fontWeight: FontWeight.w400,
     fontSize: 16,
   );
 }
