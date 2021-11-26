@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metronome/common/app_colors.dart';
 
-class AddSequence extends StatelessWidget {
+class AddSequence extends HookWidget {
   const AddSequence({
     Key? key,
+    required this.onClick,
   }) : super(key: key);
+
+  final VoidCallback onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class AddSequence extends StatelessWidget {
         width: 100,
         height: 75,
         child: ElevatedButton(
-          onPressed: (){},
+          onPressed: onClick,
           child: Icon(
             Icons.add_circle_outline,
             color: AppColors.PrimaryLight,

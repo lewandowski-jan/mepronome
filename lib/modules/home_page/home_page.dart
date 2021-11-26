@@ -110,7 +110,7 @@ class HomePage extends HookWidget {
               ],
             ),
           ),
-      ),
+        ),
         new Positioned(
           top: 0.0,
           left: 2.0,
@@ -122,10 +122,10 @@ class HomePage extends HookWidget {
             ),
             backgroundColor: Colors.transparent,
             elevation: 0.0, //Shadow gone
+            ),
           ),
-        ),
-      ],
-    ),
+        ],
+      ),
     );
   }
 }
