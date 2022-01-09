@@ -1,40 +1,88 @@
 import 'package:flutter/material.dart';
-import 'package:metronome/modules/sequencer/widgets/bottom_sheet_sequence_editor.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:metronome/common/app_colors.dart';
+import 'package:metronome/hamburger_menu.dart';
+import 'package:metronome/modules/sequencer/widgets/add_sequence.dart';
+import 'package:metronome/modules/sequencer/widgets/sequence.dart';
 
-class Sequencer extends StatelessWidget {
-  const Sequencer({Key? key}) : super(key: key);
+class Sequencer extends HookWidget {
+  Sequencer({Key? key}) : super(key: key);
+
+  final _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    final sequencesList = useState(<Sequence>[]);
+    final sequenceIndex = useState(0);
+
     return Scaffold(
-      body: Center(
-        child: Container(
-          color: Colors.amber,
-          child: MaterialButton(
-            child: Text('klik'),
-            onPressed: () {
-              showModalBottomSheet<void>(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+      drawer: HamburgerMenu(),
+      backgroundColor: AppColors.PrimaryLight,
+      body: Stack(
+        children: <Widget>[
+          SafeArea(
+          bottom: false,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'assets/mepronome_logo.png',
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                context: context,
-                builder: (_) => BottomSheetSequenceEditor(
-                  onDelete: () {
-                    print('delete'); //TODO: Delete the clicked sequence
-                  },
-                  onSave: (int bpm, int metro1, int metro2, int repeats) {
-                    print(
-                      '$bpm, $metro1, $metro2, $repeats',
-                    ); //TODO: Update data
-                  },
+                Flexible(
+                  flex: 5,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(50),
+                      ),
+                      gradient: AppColors.gradientPrimaryDarkGradientDark,
+                    ),
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 50, width: double.infinity),
+                      Wrap(
+                        alignment: WrapAlignment.start,
+                        children: [...sequencesList.value,
+                          if(sequencesList.value.length<9) AddSequence(onClick: (){
+                            sequencesList.value = [...sequencesList.value,
+                              Sequence(index: sequenceIndex.value,list: sequencesList,)];
+                            sequenceIndex.value++;
+                        },)],
+                      ),
+                    ],
+                  ),
+                  ),
                 ),
-              );
-            },
+              ],
+            ),
           ),
         ),
+        new Positioned(
+          top: 0.0,
+          left: 2.0,
+          right: 0.0,
+          child: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.menu, size: 33, color: Colors.black,), // change this size and style
+              onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0, //Shadow gone
+          ),
+        ),
+        ],
       ),
     );
   }

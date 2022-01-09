@@ -3,8 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metronome/common/app_colors.dart';
 import 'package:metronome/common/app_text_styles.dart';
 import 'package:metronome/hamburger_menu.dart';
+<<<<<<< HEAD
 import 'package:metronome/utils/metro_audio.dart';
 import 'package:provider/provider.dart';
+=======
+>>>>>>> origin/sequences
 
 class HomePage extends HookWidget {
   HomePage();
@@ -121,6 +124,7 @@ class HomePage extends HookWidget {
               ),
             ),
           ),
+<<<<<<< HEAD
           new Positioned(
             top: 0.0,
             left: 2.0,
@@ -137,6 +141,21 @@ class HomePage extends HookWidget {
               backgroundColor: Colors.transparent,
               elevation: 0.0, //Shadow gone
             ),
+=======
+        ),
+        new Positioned(
+          top: 0.0,
+          left: 2.0,
+          right: 0.0,
+          child: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.menu, size: 33, color: Colors.black,), // change this size and style
+              onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0, //Shadow gone
+            ),
+>>>>>>> origin/sequences
           ),
         ],
       ),
