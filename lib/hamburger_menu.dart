@@ -34,7 +34,9 @@ class HamburgerMenu extends StatelessWidget {
                   fontSize: 21,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/');
+              },
             ),
             ListTile(
               leading:  Icon(Icons.arrow_forward_ios_rounded),
@@ -77,7 +79,10 @@ class HamburgerMenu extends StatelessWidget {
                   fontSize: 21,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+
+                Navigator.of(context).pushReplacementNamed('/authors');
+              },
             ),
           ],
         ),

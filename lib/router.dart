@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/modules/home_page/home_page.dart';
 import 'package:metronome/modules/sequencer/sequencer.dart';
+import 'package:metronome/modules/authors/authors.dart';
 
 class AppRouter {
   static final allRoutes = [
     AppRoutes.homepage,
     AppRoutes.sequencer,
+    AppRoutes.authors,
   ];
 
   static Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
@@ -50,4 +52,9 @@ class AppRoutes {
     build: (_, __) => Sequencer(),
     route: '/sequencer',
   );
+  static final authors = AppRoute(
+    build: (_, __) => Authors(),
+    route: '/authors',
+  );
+
 }

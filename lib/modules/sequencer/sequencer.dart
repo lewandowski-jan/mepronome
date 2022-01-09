@@ -18,6 +18,7 @@ class Sequencer extends HookWidget {
     return Scaffold(
       drawer: HamburgerMenu(),
       backgroundColor: AppColors.PrimaryLight,
+      key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
           SafeArea(

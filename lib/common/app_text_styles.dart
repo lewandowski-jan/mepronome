@@ -19,4 +19,18 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     fontSize: 16,
   );
+
+  static const blue = TextStyle(
+    fontFamily: 'Metropolis',
+    color: AppColors.PrimaryAccent,
+    fontSize: 25,
+    fontWeight: FontWeight.bold
+  );
+  static const black = TextStyle(
+      fontFamily: 'Metropolis',
+      color: Colors.black,
+      fontSize: 20,
+      height: 1.6
+
+  );
 }
