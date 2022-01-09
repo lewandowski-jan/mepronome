@@ -30,12 +30,14 @@ class BottomSheetSequenceEditor extends HookWidget {
     final repeats = useState(initialRepeats ?? 3);
 
     return Container(
-      height: 368,
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(
-        horizontal: 22,
-        vertical: 16,
-      ),
+            horizontal: 22,
+            vertical: 16,
+          ) +
+          EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom,
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

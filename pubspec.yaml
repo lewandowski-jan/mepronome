@@ -32,7 +32,7 @@ dependencies:
   audioplayers: ^0.19.1
   flutter_hooks: ^0.18.0
   provider: ^5.0.0
-  soundpool: ^2.1.0
+  soundpool: ^2.2.0
   quiver: ^3.0.1
 
 dev_dependencies:
