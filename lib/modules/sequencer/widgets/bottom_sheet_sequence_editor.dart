@@ -19,7 +19,7 @@ class BottomSheetSequenceEditor extends HookWidget {
   final int? initialMetro1;
   final int? initialMetro2;
   final int? initialRepeats;
-  final VoidCallback onDelete;
+  final VoidCallback? onDelete;
   final void Function(int, int, int, int) onSave;
 
   @override
@@ -183,7 +183,7 @@ class BottomSheetSequenceEditor extends HookWidget {
               RoundedButton(
                 text: 'Usuń',
                 onPressed: () {
-                  onDelete();
+                  if(onDelete!=null) onDelete!();
                   Navigator.of(context).pop();
                 },
               ),

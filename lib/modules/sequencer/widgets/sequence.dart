@@ -4,11 +4,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metronome/common/app_colors.dart';
 import 'package:metronome/common/app_text_styles.dart';
 import 'package:metronome/modules/sequencer/widgets/bottom_sheet_sequence_editor.dart';
+import 'package:metronome/router.dart';
 
 class Sequence extends HookWidget {
   const Sequence({
     Key? key,
     required this.index,
+    required this.list,
     this.initialBpm,
     this.initialMetro1,
     this.initialMetro2,
@@ -16,6 +18,7 @@ class Sequence extends HookWidget {
   }) : super(key: key);
 
   final int index;
+  final ValueNotifier<List<Sequence>> list;
   final int? initialBpm;
   final int? initialMetro1;
   final int? initialMetro2;
@@ -48,8 +51,11 @@ class Sequence extends HookWidget {
                 initialMetro1: shownMetro1.value,
                 initialMetro2: shownMetro2.value,
                 initialRepeats: shownRepeats.value,
-                onDelete: () {
-                  print('delete sequence number ${index}'); //TODO: Delete the clicked sequence
+                onDelete: (){
+                  final s = list.value.firstWhere((e) => e.index==index);
+                  final lista = list.value..remove(s);
+                  list.value = lista.toList();
+                  print(index);
                 },
                 onSave: (int bpm, int metro1, int metro2, int repeats) {
                   shownBpm.value=bpm;

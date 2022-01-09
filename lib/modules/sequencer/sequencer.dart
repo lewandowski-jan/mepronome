@@ -12,7 +12,7 @@ class Sequencer extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sequencesList = useState(<Widget>[]);
+    final sequencesList = useState(<Sequence>[]);
     final sequenceIndex = useState(0);
 
     return Scaffold(
@@ -54,12 +54,11 @@ class Sequencer extends HookWidget {
                       const SizedBox(height: 50, width: double.infinity),
                       Wrap(
                         alignment: WrapAlignment.start,
-                        children: [...sequencesList.value,AddSequence(onClick: (){
-                          if(sequencesList.value.length<9) {
+                        children: [...sequencesList.value,
+                          if(sequencesList.value.length<9) AddSequence(onClick: (){
                             sequencesList.value = [...sequencesList.value,
-                              Sequence(index: sequenceIndex.value)];
+                              Sequence(index: sequenceIndex.value,list: sequencesList,)];
                             sequenceIndex.value++;
-                          }
                         },)],
                       ),
                     ],
