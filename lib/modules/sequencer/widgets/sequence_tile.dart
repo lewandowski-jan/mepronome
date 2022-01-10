@@ -11,9 +11,11 @@ class SequenceTile extends StatelessWidget {
     required this.onDelete,
     required this.onSave,
     required this.sequence,
+    required this.onLongPress,
   }) : super(key: key);
 
   final VoidCallback? onDelete;
+  final VoidCallback? onLongPress;
   final void Function(int, int, int, int) onSave;
   final Sequence sequence;
 
@@ -25,6 +27,7 @@ class SequenceTile extends StatelessWidget {
         width: 100,
         height: 75,
         child: ElevatedButton(
+          onLongPress: onLongPress,
           onPressed: () {
             showModalBottomSheet<void>(
               shape: RoundedRectangleBorder(
@@ -55,33 +58,35 @@ class SequenceTile extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-                    child: Text(
-                      "${sequence.notesInSequence}/${sequence.note}",
-                      style: AppTextStyles.p,
+              FittedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                      child: Text(
+                        "${sequence.notesInSequence}/${sequence.note}",
+                        style: AppTextStyles.p,
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.autorenew,
-                          size: 16,
-                          color: Colors.black,
-                        ),
-                        Text(
-                          "${sequence.repeats}",
-                          style: AppTextStyles.p,
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.autorenew,
+                            size: 16,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            "${sequence.repeats}",
+                            style: AppTextStyles.p,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

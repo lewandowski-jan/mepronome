@@ -73,6 +73,18 @@ class Sequencer extends HookWidget {
                                           sequencesList.value =
                                               sequencesList.value.toList();
                                         },
+                                        onLongPress: () {
+                                          if (isPlaying.value) {
+                                          } else {
+                                            isPlaying.value = true;
+                                            cancellable.complete(
+                                                player.playSequences(
+                                                    sequencesList.value.sublist(e.key)));
+                                            cancellable.operation.value
+                                                .whenComplete(() =>
+                                                    isPlaying.value = false);
+                                          }
+                                        },
                                       ))
                                   .toList(),
                               if (sequencesList.value.length < 9)
