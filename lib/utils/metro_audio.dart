@@ -11,39 +11,44 @@ class Sequence {
   final int bpm;
 
   Sequence({
-    required this.notesInSequence,
-    required this.note,
-    required this.bpm,
-    required this.repeats,
+    this.notesInSequence = 4,
+    this.note = 4,
+    this.bpm = 120,
+    this.repeats = 1,
   });
 }
 
-class Sequencer {
-  Sequencer({required this.metro});
+class SequencePlayer {
+  SequencePlayer({required this.metro});
   final MetroAudio metro;
 
-  void playSequence(Sequence sequence) async {
-    final _tickIntervalBPS = 60 ~/ _getLength(sequence.note, sequence.bpm) * 1000 * 1000;
-    metro.playOnce();
-    for (var i = 0; i < sequence.notesInSequence * sequence.repeats - 1; i++) {
-      await Future.delayed(Duration(microseconds: _tickIntervalBPS), () {
+  var stop = false;
+
+  Future<void> playSequences(List<Sequence> sequences) async {
+    for (Sequence sequence in sequences) {
+      final _tickIntervalBPS =
+          (60 / _getLength(sequence.note, sequence.bpm) * 1000 * 1000).floor();
+      final sounds = List.generate(
+          sequence.notesInSequence * sequence.repeats, (index) => null);
+      for (var _ in sounds) {
         metro.playOnce();
-      });
+        await Future.delayed(Duration(microseconds: _tickIntervalBPS));
+      }
     }
   }
 
   int _getLength(int note, int bpm) {
     switch (note) {
       case 1:
-        return bpm * 4;
+        return bpm ~/ 4;
       case 2:
-        return bpm * 2;
+        return bpm ~/ 2;
       case 4:
         return bpm * 1;
       case 8:
-        return bpm ~/ 2;
+        return bpm * 2;
       case 16:
-        return bpm ~/ 4;
+        return bpm * 4;
       default:
         return 0;
     }
@@ -77,7 +82,7 @@ class MetroAudio {
   }
 
   void play(int bpm) {
-    final _tickIntervalBPS = 60 ~/ bpm * 1000 * 1000;
+    final _tickIntervalBPS = ((60 / bpm * 1000 * 1000).toInt());
     _timer = Metronome.periodic(Duration(
       microseconds: _tickIntervalBPS,
     )).listen((_) => playOnce());

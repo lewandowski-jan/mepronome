@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metronome/common/app_colors.dart';
 import 'package:metronome/common/app_text_styles.dart';
 import 'package:metronome/modules/sequencer/widgets/bottom_sheet_sequence_editor.dart';
-import 'package:metronome/router.dart';
+import 'package:metronome/utils/metro_audio.dart';
 
-class Sequence extends HookWidget {
-  const Sequence({
+class SequenceTile extends StatelessWidget {
+  const SequenceTile({
     Key? key,
-    required this.index,
-    required this.list,
-    this.initialBpm,
-    this.initialMetro1,
-    this.initialMetro2,
-    this.initialRepeats,
+    required this.onDelete,
+    required this.onSave,
+    required this.sequence,
   }) : super(key: key);
 
-  final int index;
-  final ValueNotifier<List<Sequence>> list;
-  final int? initialBpm;
-  final int? initialMetro1;
-  final int? initialMetro2;
-  final int? initialRepeats;
+  final VoidCallback? onDelete;
+  final void Function(int, int, int, int) onSave;
+  final Sequence sequence;
 
   @override
   Widget build(BuildContext context) {
-    final shownBpm = useState(initialBpm ?? 120);
-    final shownMetro1 = useState(initialMetro1 ?? 4);
-    final shownMetro2 = useState(initialMetro2 ?? 4);
-    final shownRepeats = useState(initialRepeats ?? 1);
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 25),
       child: SizedBox(
         width: 100,
         height: 75,
         child: ElevatedButton(
-          onPressed: (){
-            print(index);
+          onPressed: () {
             showModalBottomSheet<void>(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -47,22 +35,12 @@ class Sequence extends HookWidget {
               ),
               context: context,
               builder: (_) => BottomSheetSequenceEditor(
-                initialBpm: shownBpm.value,
-                initialMetro1: shownMetro1.value,
-                initialMetro2: shownMetro2.value,
-                initialRepeats: shownRepeats.value,
-                onDelete: (){
-                  final s = list.value.firstWhere((e) => e.index==index);
-                  final lista = list.value..remove(s);
-                  list.value = lista.toList();
-                  print(index);
-                },
-                onSave: (int bpm, int metro1, int metro2, int repeats) {
-                  shownBpm.value=bpm;
-                  shownMetro1.value=metro1;
-                  shownMetro2.value=metro2;
-                  shownRepeats.value=repeats;
-                },
+                initialBpm: sequence.bpm,
+                initialMetro1: sequence.notesInSequence,
+                initialMetro2: sequence.note,
+                initialRepeats: sequence.repeats,
+                onDelete: onDelete,
+                onSave: onSave,
               ),
             );
           },
@@ -70,7 +48,7 @@ class Sequence extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                '${shownBpm.value}',
+                '${sequence.bpm}',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   color: Colors.black,
@@ -83,7 +61,7 @@ class Sequence extends HookWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                     child: Text(
-                      "${shownMetro1.value}/${shownMetro2.value}",
+                      "${sequence.notesInSequence}/${sequence.note}",
                       style: AppTextStyles.p,
                     ),
                   ),
@@ -97,7 +75,7 @@ class Sequence extends HookWidget {
                           color: Colors.black,
                         ),
                         Text(
-                          "${shownRepeats.value}",
+                          "${sequence.repeats}",
                           style: AppTextStyles.p,
                         ),
                       ],
@@ -108,18 +86,19 @@ class Sequence extends HookWidget {
             ],
           ),
           style: ButtonStyle(
-            backgroundColor: getColor(AppColors.PrimaryLight, AppColors.PrimaryAccent),
+            backgroundColor:
+                getColor(AppColors.PrimaryLight, AppColors.PrimaryAccent),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
-                    side: BorderSide(color: AppColors.PrimaryAccent, width: 2)
-                )
-            ),
+                    side:
+                        BorderSide(color: AppColors.PrimaryAccent, width: 2))),
           ),
         ),
       ),
     );
   }
+
   MaterialStateProperty<Color> getColor(Color color, Color colorPressed) {
     final getColor = (Set<MaterialState> states) {
       if (states.contains(MaterialState.pressed)) {

@@ -52,16 +52,6 @@ class HamburgerMenu extends StatelessWidget {
             ),
             ListTile(
               leading:  Icon(Icons.arrow_forward_ios_rounded),
-              title: const Text('Wczytaj sekwencję',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 21,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              leading:  Icon(Icons.arrow_forward_ios_rounded),
               title: const Text('Ustawienia',
                 style: TextStyle(
                   fontFamily: 'Montserrat',

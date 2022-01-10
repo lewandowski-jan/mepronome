@@ -126,10 +126,10 @@ class BottomSheetSequenceEditor extends HookWidget {
                   TouchSpin(
                     value: metro2.value.toString(),
                     onPressedMinus: () {
-                      if (metro2.value > 1) metro2.value = metro2.value - 1;
+                      if (metro2.value > 1) metro2.value = metro2.value ~/ 2;
                     },
                     onPressedPlus: () {
-                      if (metro2.value < 16) metro2.value = metro2.value + 1;
+                      if (metro2.value < 16) metro2.value = metro2.value * 2;
                     },
                   ),
                 ],
@@ -185,7 +185,7 @@ class BottomSheetSequenceEditor extends HookWidget {
               RoundedButton(
                 text: 'Usuń',
                 onPressed: () {
-                  if(onDelete!=null) onDelete!();
+                  if (onDelete != null) onDelete!();
                   Navigator.of(context).pop();
                 },
               ),

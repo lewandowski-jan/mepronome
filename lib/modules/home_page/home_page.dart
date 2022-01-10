@@ -3,21 +3,18 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metronome/common/app_colors.dart';
 import 'package:metronome/common/app_text_styles.dart';
 import 'package:metronome/hamburger_menu.dart';
-<<<<<<< HEAD
 import 'package:metronome/utils/metro_audio.dart';
 import 'package:provider/provider.dart';
-=======
->>>>>>> origin/sequences
 
 class HomePage extends HookWidget {
   HomePage();
 
-  final _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final isPlaying = useState(false);
-    final bpm = useState(128);
+    final bpm = useState(120);
     return Scaffold(
       drawer: HamburgerMenu(),
       backgroundColor: AppColors.PrimaryLight,
@@ -28,23 +25,15 @@ class HomePage extends HookWidget {
             bottom: false,
             child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Flexible(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 24, 0, 16),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/mepronome_logo.png',
-                          ),
-                        ),
-                      ),
+                  Container(
+                    margin: const EdgeInsets.all(24),
+                    child: Image.asset(
+                      'assets/mepronome_logo.png',
                     ),
                   ),
-                  Flexible(
-                    flex: 5,
+                  Expanded(
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -79,9 +68,9 @@ class HomePage extends HookWidget {
                                   : (newBpm) {
                                       bpm.value = newBpm.toInt();
                                     },
-                              min: 25,
-                              max: 400,
-                              divisions: 375,
+                              min: 20,
+                              max: 260,
+                              divisions: 240,
                               activeColor: AppColors.PrimaryLight,
                               inactiveColor: AppColors.PrimaryLight,
                             ),
@@ -124,7 +113,6 @@ class HomePage extends HookWidget {
               ),
             ),
           ),
-<<<<<<< HEAD
           new Positioned(
             top: 0.0,
             left: 2.0,
@@ -141,21 +129,6 @@ class HomePage extends HookWidget {
               backgroundColor: Colors.transparent,
               elevation: 0.0, //Shadow gone
             ),
-=======
-        ),
-        new Positioned(
-          top: 0.0,
-          left: 2.0,
-          right: 0.0,
-          child: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.menu, size: 33, color: Colors.black,), // change this size and style
-              onPressed: () => _scaffoldKey.currentState!.openDrawer(),
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0.0, //Shadow gone
-            ),
->>>>>>> origin/sequences
           ),
         ],
       ),
