@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:metronome/router.dart';
 import 'package:metronome/utils/metro_audio.dart';
+import 'package:provider/provider.dart';
 
-final metro = MetroAudio();
 void main() async {
-  runApp(MetronomeApp());
+  runApp(Provider(
+    create: (context) => MetroAudio()..prepare(),
+    child: MetronomeApp(),
+  ));
 }
 
 class MetronomeApp extends StatefulWidget {
@@ -19,7 +22,6 @@ class MetronomeApp extends StatefulWidget {
 }
 
 class _MetronomeAppState extends State<MetronomeApp> {
-  final metroAudio = MetroAudio();
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
@@ -35,7 +37,7 @@ class _MetronomeAppState extends State<MetronomeApp> {
 
   @override
   dispose() {
-    this.metroAudio.dispose();
+    Provider.of(context)<MetroAudio>().dispose();
     super.dispose();
   }
 }

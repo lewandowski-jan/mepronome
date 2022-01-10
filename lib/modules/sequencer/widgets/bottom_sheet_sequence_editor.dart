@@ -19,7 +19,7 @@ class BottomSheetSequenceEditor extends HookWidget {
   final int? initialMetro1;
   final int? initialMetro2;
   final int? initialRepeats;
-  final VoidCallback onDelete;
+  final VoidCallback? onDelete;
   final void Function(int, int, int, int) onSave;
 
   @override
@@ -30,12 +30,14 @@ class BottomSheetSequenceEditor extends HookWidget {
     final repeats = useState(initialRepeats ?? 3);
 
     return Container(
-      height: 368,
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(
-        horizontal: 22,
-        vertical: 16,
-      ),
+            horizontal: 22,
+            vertical: 16,
+          ) +
+          EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom,
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -124,10 +126,10 @@ class BottomSheetSequenceEditor extends HookWidget {
                   TouchSpin(
                     value: metro2.value.toString(),
                     onPressedMinus: () {
-                      if (metro2.value > 1) metro2.value = metro2.value - 1;
+                      if (metro2.value > 1) metro2.value = metro2.value ~/ 2;
                     },
                     onPressedPlus: () {
-                      if (metro2.value < 16) metro2.value = metro2.value + 1;
+                      if (metro2.value < 16) metro2.value = metro2.value * 2;
                     },
                   ),
                 ],
@@ -183,7 +185,7 @@ class BottomSheetSequenceEditor extends HookWidget {
               RoundedButton(
                 text: 'Usuń',
                 onPressed: () {
-                  onDelete();
+                  if (onDelete != null) onDelete!();
                   Navigator.of(context).pop();
                 },
               ),
